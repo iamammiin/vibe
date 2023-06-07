@@ -1,0 +1,694 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Vibe Project Api Documentation",
+        "description": "This is a documentation for the Vibe Project witch is produced by Swagger",
+        "contact": {
+            "email": "aminmohammadmazreali@gmail.com"
+        },
+        "license": {
+            "name": "Nginx 1.17.7",
+            "url": "https://nginx.org/LICENSE"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080/api",
+            "description": "Base Url"
+        }
+    ],
+    "paths": {
+        "/api": {},
+        "/auth/change-password": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "change user password",
+                "description": "change user password",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ChangePasswordUserRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "202": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "client_bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/auth/reset-password": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "reset password user",
+                "description": "reset password user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResetPasswordRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": ""
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/forgot-password": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "forgot password user",
+                "description": "forgot password user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SendTokenRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": ""
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "login user",
+                "description": "login user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LoginUserRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/UserDTO"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "logout user",
+                "description": "logout user",
+                "responses": {
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "client_bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/auth/refresh": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "refresh user token",
+                "description": "refresh user token",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/UserDTO"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "client_bearer_token": []
+                    }
+                ]
+            }
+        },
+        "/auth/register": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "register user",
+                "description": "register new user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RegisterUserRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/UserDTO"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/auth/upload-avatar": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "upload user avatar",
+                "description": "upload user avatar",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UploadAvatarUserRequestBody"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "data": {
+                                            "$ref": "#/components/schemas/UserDTO"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Unauthenticated"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "client_bearer_token": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Unauthenticated": {
+                "title": "Unauthenticated",
+                "description": "Unauthenticated Request",
+                "properties": {
+                    "message": {
+                        "title": "message",
+                        "type": "string",
+                        "example": "Unauthenticated"
+                    }
+                },
+                "type": "object"
+            },
+            "NotFound": {
+                "title": "notFound",
+                "description": "notFound Request",
+                "properties": {
+                    "message": {
+                        "title": "message",
+                        "type": "string",
+                        "example": "not Found"
+                    },
+                    "code": {
+                        "title": "code",
+                        "type": "integer",
+                        "example": "404"
+                    }
+                },
+                "type": "object"
+            },
+            "BadRequest": {
+                "title": "badRequest",
+                "description": "Bad Request",
+                "properties": {
+                    "message": {
+                        "title": "message",
+                        "type": "string",
+                        "example": "Bad Request"
+                    },
+                    "code": {
+                        "title": "code",
+                        "type": "integer",
+                        "example": "400"
+                    }
+                },
+                "type": "object"
+            },
+            "ChangePasswordUserRequestBody": {
+                "title": "Change Password User Request Body",
+                "description": "Change Password User Request Body",
+                "properties": {
+                    "currentPassword": {
+                        "title": "currentPassword",
+                        "description": "current password of user",
+                        "type": "string",
+                        "example": "123456"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "password of user",
+                        "type": "string",
+                        "example": "1234567"
+                    }
+                },
+                "type": "object"
+            },
+            "ResetPasswordRequestBody": {
+                "title": "Reset Password Request Body",
+                "description": "Reset Password Request Body",
+                "properties": {
+                    "password": {
+                        "title": "password",
+                        "description": "password of user",
+                        "type": "string",
+                        "example": "12345"
+                    },
+                    "token": {
+                        "title": "token",
+                        "description": "forgot password token",
+                        "type": "string",
+                        "example": "4455"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email og user",
+                        "type": "string",
+                        "example": "user@vibe.com"
+                    }
+                },
+                "type": "object"
+            },
+            "SendTokenRequestBody": {
+                "title": "Send Token Request Body",
+                "description": "Send Token Request Body",
+                "properties": {
+                    "email": {
+                        "title": "email",
+                        "description": "email of user",
+                        "type": "string",
+                        "example": "user@vibe.com"
+                    }
+                },
+                "type": "object"
+            },
+            "LoginUserRequestBody": {
+                "title": "login User Request Body",
+                "description": "login User Request Body",
+                "properties": {
+                    "email": {
+                        "title": "email",
+                        "description": "email of user",
+                        "type": "string",
+                        "example": "user@vibe.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "password of user",
+                        "type": "string",
+                        "example": "123456"
+                    }
+                },
+                "type": "object"
+            },
+            "RegisterUserRequestBody": {
+                "title": "Register User Request Body",
+                "description": "Register User Request Body",
+                "properties": {
+                    "type": {
+                        "title": "type",
+                        "description": "type of user",
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email of user",
+                        "type": "string",
+                        "example": "user@vibe.com"
+                    },
+                    "password": {
+                        "title": "password",
+                        "description": "password of user",
+                        "type": "string",
+                        "example": "123456"
+                    }
+                },
+                "type": "object"
+            },
+            "UpdateUserRequestBody": {
+                "title": "Update User Request Body",
+                "description": "Update User Request Body",
+                "properties": {
+                    "firstName": {
+                        "title": "firstName",
+                        "description": "first name of user",
+                        "type": "string",
+                        "example": "Amin"
+                    },
+                    "lastName": {
+                        "title": "lastName",
+                        "description": "last name of user",
+                        "type": "string",
+                        "example": "Mazreali"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "phone of user",
+                        "type": "string",
+                        "example": "09214125578"
+                    },
+                    "type": {
+                        "title": "type",
+                        "description": "type of user",
+                        "type": "integer",
+                        "example": 2
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email of user",
+                        "type": "string",
+                        "example": "amin@gmail.com"
+                    },
+                    "country": {
+                        "title": "country",
+                        "description": "country of user",
+                        "type": "string",
+                        "example": "iran"
+                    },
+                    "address": {
+                        "title": "address",
+                        "description": "address of user",
+                        "type": "string",
+                        "example": "iran,tehran,vanak"
+                    },
+                    "language": {
+                        "title": "language",
+                        "description": "language of user",
+                        "type": "string",
+                        "example": "English"
+                    },
+                    "price": {
+                        "title": "price",
+                        "description": "price of user",
+                        "type": "string",
+                        "example": "Rial"
+                    },
+                    "biography": {
+                        "title": "biography",
+                        "description": "biography of user",
+                        "type": "string",
+                        "example": "i am amin, ..."
+                    },
+                    "paypalAddress": {
+                        "title": "paypalAddress",
+                        "description": "Paypal address of user",
+                        "type": "string",
+                        "example": "paypal.com/amin"
+                    },
+                    "discountPercent": {
+                        "title": "discountPercent",
+                        "description": "discount percent of user",
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "instagramUsername": {
+                        "title": "instagramUsername",
+                        "description": "instagram username of user",
+                        "type": "string",
+                        "example": "iamammiin"
+                    },
+                    "youtubeUsername": {
+                        "title": "youtubeUsername",
+                        "description": "youtube username of user",
+                        "type": "string",
+                        "example": "iamammiin"
+                    },
+                    "tiktokUsername": {
+                        "title": "tiktokUsername",
+                        "description": "tiktok username of user",
+                        "type": "string",
+                        "example": "iamammiin"
+                    }
+                },
+                "type": "object"
+            },
+            "UploadAvatarUserRequestBody": {
+                "title": "Upload Avatar User Request Body",
+                "description": "Upload Avatar User Request Body",
+                "properties": {
+                    "avatar": {
+                        "title": "avatar",
+                        "description": "avatar of user",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "type": "object"
+            },
+            "UserDTO": {
+                "title": "User Dto",
+                "description": "User data",
+                "properties": {
+                    "firstName": {
+                        "title": "firstName",
+                        "description": "first name of user",
+                        "type": "string",
+                        "example": "User"
+                    },
+                    "lastName": {
+                        "title": "lastName",
+                        "description": "last name of user",
+                        "type": "string",
+                        "example": "User last Name"
+                    },
+                    "phone": {
+                        "title": "phone",
+                        "description": "phone of user",
+                        "type": "string",
+                        "example": "09211111111"
+                    },
+                    "type": {
+                        "title": "type",
+                        "description": "type of user",
+                        "type": "string",
+                        "example": "Fan or Venue"
+                    },
+                    "email": {
+                        "title": "email",
+                        "description": "email of user",
+                        "type": "string",
+                        "example": "user@vibe.com"
+                    },
+                    "id": {
+                        "title": "id",
+                        "description": "id of user",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "avatar": {
+                        "title": "avatar",
+                        "description": "avatar of user",
+                        "type": "string",
+                        "example": "test.png"
+                    },
+                    "token": {
+                        "title": "token",
+                        "description": "token of user",
+                        "type": "string",
+                        "example": "jwt token"
+                    }
+                },
+                "type": "object"
+            }
+        },
+        "securitySchemes": {
+            "client_bearer_token": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "authorization",
+                "in": "header"
+            }
+        }
+    }
+}
