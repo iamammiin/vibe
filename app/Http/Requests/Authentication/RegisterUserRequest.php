@@ -15,6 +15,8 @@ use Illuminate\Foundation\Http\FormRequest;
  *      @OA\Property(property="type", title="type", description="type of user", type="int", example=2),
  *      @OA\Property(property="email", title="email", description="email of user", type="string", example="user@vibe.com"),
  *      @OA\Property(property="password", title="password", description="password of user", type="string", example="123456"),
+ *      @OA\Property(property="firstName", title="firstName", description="first name of user", type="string", example="vibe"),
+ *      @OA\Property(property="lastName", title="lastName", description="last name of user", type="string", example="viber"),
  * )
  */
 class RegisterUserRequest extends FormRequest
@@ -38,6 +40,8 @@ class RegisterUserRequest extends FormRequest
             UserApiField::TYPE => 'required|in:'. implode(',',Type::AVAILABLE_TYPE),
             UserApiField::EMAIL => 'required|email|max:195|unique:users',
             UserApiField::PASSWORD => 'required|min:6',
+            UserApiField::FIRST_NAME => 'nullable|min:3',
+            UserApiField::LAST_NAME => 'nullable|min:3'
         ];
     }
 
