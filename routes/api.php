@@ -18,6 +18,10 @@ use App\Http\Controllers\Authentication\ForgotPassword\ {
     ResetPasswordController
 };
 
+use App\Http\Controllers\File\ {
+    UploadFileController
+};
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,4 +51,11 @@ Route::group([
         Route::post('/upload-avatar', UploadAvatarController::class);
         Route::patch('/update', UpdateController::class);
     });
+});
+
+Route::group([
+    'prefix' => 'file',
+    'middleware' => 'auth:api'
+], function () {
+    Route::post('/upload', UploadFileController::class);
 });
