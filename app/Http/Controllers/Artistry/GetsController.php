@@ -17,7 +17,7 @@ use Illuminate\Http\JsonResponse;
  *          description="Successful operation",
  *          @OA\JsonContent(type="object",
  *              @OA\Property(property="message", type="string", example=""),
- *              @OA\Property(property="data", type="object",ref="#/components/schemas/ArtistryDTO")
+ *              @OA\Property(property="data", type="array",@OA\Items(type="object",ref="#/components/schemas/ArtistryDTO"))
  *          )
  *       ),
  *      @OA\Response(

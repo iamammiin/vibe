@@ -46,16 +46,25 @@ class UserTransformer extends TransformerAbstract implements Transformer
 
         return $this->collection($vibes, new ArtistryTransformer());
     }
-    public function includeAddress(User $user): Item
+
+    public function includeAddress(User $user): ?Item
     {
         $address = $user->address;
+
+        if (empty($address)) {
+            return null;
+        }
 
         return $this->item($address, new AddressTransformer());
     }
 
-    public function includeExtraData(User $user): Item
+    public function includeExtraData(User $user): ?Item
     {
         $extraData = $user->extraData;
+
+        if (empty($extraData)) {
+            return null;
+        }
 
         return $this->item($extraData, new ExtraDataTransformer());
     }
