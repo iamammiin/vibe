@@ -30,7 +30,7 @@ class AssignVibeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            '*' => 'int'
+            '*' => 'int|exists:vibes,id'
         ];
     }
 }
