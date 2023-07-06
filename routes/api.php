@@ -39,6 +39,7 @@ use App\Http\Controllers\User\ExtraData\ {
 
 use App\Http\Controllers\User\ {
     AssignVibeController,
+    AssignArtistryController,
     GetProfileController
 };
 
@@ -108,6 +109,7 @@ Route::group([
         });
 
         Route::post('/assign-vibe', AssignVibeController::class);
+        Route::post('/assign-artistry', AssignArtistryController::class);
         Route::get('/get-profile', GetProfileController::class);
     });
 });

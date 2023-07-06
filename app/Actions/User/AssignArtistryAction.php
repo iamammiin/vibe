@@ -6,15 +6,15 @@ use App\Actions\Action;
 use App\Http\Transformers\UserTransformer;
 use App\Models\Vibe;
 
-class AssignVibeAction extends Action
+class AssignArtistryAction extends Action
 {
-    public function __invoke(array $vibes): array
+    public function __invoke(array $artistry): array
     {
         $user = auth()->user();
 
-        $user->vibe()->sync($vibes);
+        $user->artistry()->sync($artistry);
 
-        $response = $this->transform($user, new UserTransformer(), ['vibe']);
+        $response = $this->transform($user, new UserTransformer(), ['artistry']);
 
         return $this->toAPIUsageField($response);
     }
