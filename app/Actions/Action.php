@@ -2,6 +2,14 @@
 
 namespace App\Actions;
 
+use App\Http\Transformers\Serializers\CustomSerializer;
+use App\Http\Transformers\Transformer;
+use Illuminate\Database\Eloquent\Model;
+use League\Fractal\Manager;
+use League\Fractal\Resource\Item;
+use League\Fractal\Serializer\ArraySerializer;
+use League\Fractal\Serializer\DataArraySerializer;
+
 class Action
 {
     protected function toDBUsageField(array $fields): array
@@ -42,5 +50,16 @@ class Action
         $str[0] = strtolower($str[0]);
 
         return $str;
+    }
+
+    protected function transform(Model $model, Transformer $transformer, array $includes = []): array
+    {
+        $manager = new Manager();
+        $manager->setSerializer(new CustomSerializer());
+        $manager->parseIncludes($includes);
+        $resource = new Item($model, $transformer);
+
+
+        return $manager->createData($resource)->toArray();
     }
 }

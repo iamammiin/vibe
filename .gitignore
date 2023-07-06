@@ -21,3 +21,4 @@ yarn-error.log
 .DS_Store
 yes
 yes.pub
+/storage/api-docs/api-docs.json

@@ -9,7 +9,7 @@ use App\Http\Requests\File\UploadFileRequest;
 
 /**
  * @OA\Post(
- *      path="/file/upload",
+ *      path="/files/upload",
  *      tags={"File"},
  *      summary="upload file",
  *      description="upload file",
